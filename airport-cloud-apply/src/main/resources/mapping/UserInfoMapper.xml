@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.platform.airportcloudapply.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.platform.airportcloudapply.entity.UserInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_openid" jdbcType="VARCHAR" property="userOpenid" />
+    <result column="user_head" jdbcType="VARCHAR" property="userHead" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_gender" jdbcType="VARCHAR" property="userGender" />
+    <result column="user_country" jdbcType="VARCHAR" property="userCountry" />
+    <result column="user_city" jdbcType="VARCHAR" property="userCity" />
+    <result column="user_province" jdbcType="VARCHAR" property="userProvince" />
+    <result column="user_new_login" jdbcType="TIMESTAMP" property="userNewLogin" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="give_amount" jdbcType="DOUBLE" property="giveAmount" />
+    <result column="today_income" jdbcType="DOUBLE" property="todayIncome" />
+    <result column="total_income" jdbcType="DOUBLE" property="totalIncome" />
+    <result column="income_balance" jdbcType="DOUBLE" property="incomeBalance" />
+    <result column="is_boss" jdbcType="INTEGER" property="isBoss" />
+    <result column="first_card_pay" jdbcType="INTEGER" property="firstCardPay" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_openid, user_head, user_name, user_gender, user_country, user_city, user_province, 
+    user_new_login, amount, give_amount, today_income, total_income, income_balance, 
+    is_boss,source_user_id,source,first_pay,first_card_pay
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.platform.airportcloudapply.entity.UserInfo">
+    insert into user_info (id, user_openid, user_head, 
+      user_name, user_gender, user_country, 
+      user_city, user_province, user_new_login, 
+      amount, give_amount, today_income, 
+      total_income, income_balance, is_boss,source_user_id
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userOpenid,jdbcType=VARCHAR}, #{userHead,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{userGender,jdbcType=VARCHAR}, #{userCountry,jdbcType=VARCHAR}, 
+      #{userCity,jdbcType=VARCHAR}, #{userProvince,jdbcType=VARCHAR}, #{userNewLogin,jdbcType=TIMESTAMP}, 
+      #{amount,jdbcType=DOUBLE}, #{giveAmount,jdbcType=DOUBLE}, #{todayIncome,jdbcType=DOUBLE}, 
+      #{totalIncome,jdbcType=DOUBLE}, #{incomeBalance,jdbcType=DOUBLE}, #{isBoss,jdbcType=INTEGER},
+      #{sourceUserId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.platform.airportcloudapply.entity.UserInfo">
+    update user_info
+    <set>
+      <if test="userOpenid != null">
+        user_openid = #{userOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="userHead != null">
+        user_head = #{userHead,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userGender != null">
+        user_gender = #{userGender,jdbcType=VARCHAR},
+      </if>
+      <if test="userCountry != null">
+        user_country = #{userCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="userCity != null">
+        user_city = #{userCity,jdbcType=VARCHAR},
+      </if>
+      <if test="userProvince != null">
+        user_province = #{userProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="userNewLogin != null">
+        user_new_login = #{userNewLogin,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="giveAmount != null">
+        give_amount = #{giveAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="todayIncome != null">
+        today_income = #{todayIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="totalIncome != null">
+        total_income = #{totalIncome,jdbcType=DOUBLE},
+      </if>
+      <if test="incomeBalance != null">
+        income_balance = #{incomeBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="isBoss != null">
+      is_boss = #{isBoss,jdbcType=INTEGER},
+    </if>
+      <if test="firstPay != null">
+        first_pay = #{firstPay,jdbcType=INTEGER},
+      </if>
+      <if test="firstCardPay != null">
+        first_card_pay = #{firstCardPay,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>
